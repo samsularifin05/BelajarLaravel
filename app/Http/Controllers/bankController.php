@@ -21,7 +21,11 @@ class BankController extends Controller
      */
     public function create()
     {
-        //
+        // $validatedData = $request->validate([
+        //     'kode_bank' => 'required|string|max:255',
+        //     'nama_bank' => 'required|string|max:255',
+        //     'no_rekening' => 'required|string',
+        // ]);
     }
 
     /**
