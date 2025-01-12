@@ -51,7 +51,11 @@ class MemberController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $member = MemberBank::where('nama_member', $id)->first();
+        if (!$member) {
+            return response()->json(['message' => 'name member not found'], 404);
+        }
+        return response()->json($member, 201);
     }
 
     /**
@@ -67,7 +71,21 @@ class MemberController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $member = MemberBank::where('nama_member', $id)->first();
+
+        if (!$member) {
+            return response()->json(['message' => 'nama member tidak tersedia'], 404);
+        }
+
+        $validaatedData = $request->validate([
+            'nama_member' => 'required',
+            'email_member'  => 'required',
+            'no_telp_member'  => 'required',
+            'alamat_member'  => 'required',
+        ]);
+
+        $member->update($validaatedData);
+        return response()->json($member, 200);
     }
 
     /**
