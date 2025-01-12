@@ -93,6 +93,12 @@ class MemberController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $member = MemberBank::where('nama_member', $id)->first();
+
+        if (!$member) {
+            return response()->json(['message' => 'nama member tidak tersedia'], 404);
+        }
+        $member->delete();
+        return response()->json(['message' => 'nama member successfully'], 200);
     }
 }
